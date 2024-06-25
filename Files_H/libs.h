@@ -84,6 +84,7 @@ Desc * PreencherDataBase(int op, Desc *descritor);//preenche a lista DB
 void printLista(); //exibe a lista completa de musicas
 void apagaDB(Desc *descritor); //liibera a memória alocada para a lista db
 Desc * insertListDB(Desc *descritor, Music *MusicItem);
+Node * criaNodo();
 
 //Declaração das Funções PL
 Descpl * createPlaylist(Desc *descritor); //cria uma playlist
@@ -91,6 +92,7 @@ Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor);
 Descpl * playlitaleatoria(Descpl *descritorpl, Desc *descritor);
 Descpl * insertListPL(Descpl *descritor, Musicpl *MusicItem);
 void apagaPL(Descpl *descritor); //liibera a memória alocada para a lista db
+Nodepl * criaNodoPL();
 
 //ordenação
 int compare(const void* a, const void* b);
