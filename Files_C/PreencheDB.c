@@ -3,7 +3,7 @@
 Desc * PreencherDataBase(int op, Desc *descritor){
     char *token, linha[100], endereco[256];
     int reproducoes, size, cont=0;
-    Music *MusicItem = (Music*)malloc(sizeof(Music)); //aloca espaço para MusicItem
+    Music *MusicItem = (Music*)malloc(sizeof(Music));
     FILE *arquivo;
 
     switch (op)
@@ -30,6 +30,8 @@ Desc * PreencherDataBase(int op, Desc *descritor){
     // Lê e processa as linhas restantes
     while (fgets(linha, sizeof(linha), arquivo) != NULL) //loop do arquivo
     {
+        free(MusicItem);
+        MusicItem = (Music*)malloc(sizeof(Music)); //aloca espaço para MusicItem
         token = strtok(linha,";");
         strcpy(MusicItem->Titulo,token);
         token = strtok(NULL,";");
