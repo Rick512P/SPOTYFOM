@@ -3,10 +3,10 @@
 int main(){
     int opcode = 0, opa = 0;
     char implst;
-    Node *MusicaDB;
-    Desc *descritorDB;
-    Nodepl *MusicaPL;
-    Descpl *descritorPL;
+    Node *MusicaDB = NULL;
+    Desc *descritorDB = NULL;
+    Nodepl *MusicaPL = NULL;
+    Descpl *descritorPL = NULL;
 
     descritorDB = DataBase(descritorDB);
 
@@ -74,6 +74,7 @@ int main(){
                                 {
                                 case 's':
                                     importLista(descritorDB);
+                                    opa = 0;
                                     break;
                                 
                                 default:
@@ -85,10 +86,14 @@ int main(){
                             printf("Opção inválida");
                             break;
                         }
+                    
                 };
+                break;
             case 0:
-                apagaDB(descritorDB);
-                apagaPL(descritorPL);
+                if (descritorDB != NULL)
+                    apagaDB(descritorDB);
+                if (descritorPL != NULL)
+                    apagaPL(descritorPL);
                 printf("Encerrando o Programa!\n");
                 sleep(1.5);
                 system("clear");

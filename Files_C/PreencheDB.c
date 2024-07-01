@@ -2,7 +2,7 @@
 
 Desc * PreencherDataBase(int op, Desc *descritor){
     char *token, linha[100], endereco[256];
-    int reproducoes, size, cont=0;
+    int reproducoes, size, cont=-1;
     Music *MusicItem = (Music*)malloc(sizeof(Music));
     FILE *arquivo;
 
@@ -25,33 +25,34 @@ Desc * PreencherDataBase(int op, Desc *descritor){
         return descritor;
     }
 
-    size = sizeof(linha); //recebe tamanho da lista
-
     // Lê e processa as linhas restantes
     while (fgets(linha, sizeof(linha), arquivo) != NULL) //loop do arquivo
-    {
-        free(MusicItem);
-        MusicItem = (Music*)malloc(sizeof(Music)); //aloca espaço para MusicItem
-        token = strtok(linha,";");
-        strcpy(MusicItem->Titulo,token);
-        token = strtok(NULL,";");
-        strcpy(MusicItem->Artista,token);
-        token = strtok(NULL,";");
-        strcpy(MusicItem->Letra,token);
-        token = strtok(NULL,";");
+    {   
+        if (cont != -1){
+            MusicItem = (Music*)malloc(sizeof(Music)); //aloca espaço para MusicItem
+            token = strtok(linha,";");
+            strcpy(MusicItem->Artista,token);
+            token = strtok(NULL,";");
+            MusicItem->id = cont;
+            token = strtok(NULL,";");
+            strcpy(MusicItem->Titulo,token);
+            token = strtok(NULL,";");
+            strcpy(MusicItem->Letra,token);
+            token = strtok(NULL,";");
+            
+            MusicItem->Reproducoes=0;
+            cont ++;
 
-        MusicItem->id = atoi(token);
-        MusicItem->Reproducoes=0;
-        descritor = insertListDB(descritor, MusicItem);
-        cont ++;
-    }
-    if (op == 1){
-        if (size == cont){//compara se a quantia de musicas dada pelo arquivo é igual a quantia lida
-            descritor->size=size;//Aloca o tamanho da lista
+            insertListDB(descritor, MusicItem);
         }
         else{
-            descritor->size=cont;//Aloca o tamanho da lista
-            printf("Quantia de musicas presentes no arquivo não bate com quantia dada.");
+            size = atoi(linha);
+            cont = 0;
+        }
+    }
+    if (op == 1){
+        if (size != descritor->size){//compara se a quantia de musicas dada pelo arquivo é igual a quantia lida
+            printf("Quantia de musicas presentes no arquivo não bate com quantia dada.\n Foi lido um total de %dMúsicas!\n", descritor->size);
         }
     }
     
