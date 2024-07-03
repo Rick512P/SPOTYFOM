@@ -3,7 +3,7 @@
 Desc * DataBase(){
     Desc *desc = (Desc*)malloc(sizeof(Desc));
     desc->first = NULL;
-    desc->size = 0;
+    desc->size = -1;
 
     //Criação da Lista
     desc = PreencherDataBase(0, desc);

@@ -1,8 +1,8 @@
 #include "../Files_H/libs.h"
 
 Desc * PreencherDataBase(int op, Desc *descritor){
-    char *token, linha[100], endereco[256];
-    int reproducoes, size, cont=-1;
+    char *token, linha[256], endereco[256];
+    int reproducoes, size;
     Music *MusicItem = (Music*)malloc(sizeof(Music));
     FILE *arquivo;
 
@@ -28,12 +28,12 @@ Desc * PreencherDataBase(int op, Desc *descritor){
     // Lê e processa as linhas restantes
     while (fgets(linha, sizeof(linha), arquivo) != NULL) //loop do arquivo
     {   
-        if (cont != -1){
+        if (descritor->size != -1){
             MusicItem = (Music*)malloc(sizeof(Music)); //aloca espaço para MusicItem
             token = strtok(linha,";");
             strcpy(MusicItem->Artista,token);
             token = strtok(NULL,";");
-            MusicItem->id = cont;
+            MusicItem->id = descritor->size;
             token = strtok(NULL,";");
             strcpy(MusicItem->Titulo,token);
             token = strtok(NULL,";");
@@ -41,13 +41,12 @@ Desc * PreencherDataBase(int op, Desc *descritor){
             token = strtok(NULL,";");
             
             MusicItem->Reproducoes=0;
-            cont ++;
 
             insertListDB(descritor, MusicItem);
         }
         else{
             size = atoi(linha);
-            cont = 0;
+            descritor->size = 0;
         }
     }
     if (op == 1){

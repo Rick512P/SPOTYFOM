@@ -9,6 +9,6 @@ void apagaDB(Desc *descritor){
         free(previous);//remove a lista desde o primeiro elemento, usando o aux como guia
     }
     free(auxiliary);
-    descritor->size = 0;
+    descritor->size = -1;
     descritor->first = NULL;
 }
