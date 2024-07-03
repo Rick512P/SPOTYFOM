@@ -1,8 +1,8 @@
 #include "../Files_H/libs.h"
 
 void apagaDB(Desc *descritor){
-    Node *auxiliary = descritor->first;
-    Node *previous;
+    Nodo *auxiliary = descritor->first;
+    Nodo *previous;
     while (auxiliary->next != NULL){
         previous = auxiliary;
         auxiliary = auxiliary->next;

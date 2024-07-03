@@ -3,12 +3,15 @@
 int main(){
     int opcode = 0, opa = 0;
     char implst;
-    Node *MusicaDB = NULL;
-    Desc *descritorDB = NULL;
-    Nodepl *MusicaPL = NULL;
-    Descpl *descritorPL = NULL;
+    Nodo *MusicaDB = NULL;
+    Desc *DescritorDB = NULL;
+    NodoFila *MusicaFila = NULL;
+    DescFila *DescritorFila = NULL;
+    NodoPilha *MusicaPilha = NULL;
+    DescPilha *DescritorPilha = NULL;
 
-    descritorDB = DataBase(descritorDB);
+
+    DescritorDB = DataBase(DescritorDB);
 
     printf("Seja Bem vindo ao seu Gerenciador Pessoal de Músicas!\n");
     do
@@ -30,27 +33,56 @@ int main(){
                 break;
 
             case 2:
-                if(descritorPL->first != NULL){
-                    printf("Aviso, a playlist anterior será deletada!\n");
-                    printf("Deseja continuar? s/n");
-                    scanf(" %c", &implst);
-                    implst=tolower(implst);
-                    switch (implst)
-                    {
-                    case 's':
-                        apagaPL(descritorPL);
-                        descritorPL = createPlaylist(descritorDB);
-                        break;
-                    default:
-                        break;
+                char playlist;
+                puts("Deseja criar uma playlist Personalizada ou Aleatória? p/a");
+                switch (playlist)
+                {
+                case 'p':
+                    if(DescritorFila->head != NULL){
+                        printf("Aviso, a playlist anterior será deletada!\n");
+                        printf("Deseja continuar? s/n");
+                        scanf(" %c", &implst);
+                        implst=tolower(implst);
+                        switch (implst)
+                        {
+                        case 's':
+                            //apagaPL(DescritorFila);
+                            //DescritorFila = createPlaylist(DescritorDB);
+                            break;
+                        default:
+                            break;
+                        }
                     }
-                }
-                else{
-                    descritorPL = createPlaylist(descritorDB);
+                    else{
+                        //DescritorFila = createPlaylist(DescritorDB);
+                    }
+                    break;
+                case 'a':
+                    if(DescritorPilha->pilha != NULL){
+                        printf("Aviso, a playlist anterior será deletada!\n");
+                        printf("Deseja continuar? s/n");
+                        scanf(" %c", &implst);
+                        implst=tolower(implst);
+                        switch (implst)
+                        {
+                        case 's':
+                            //apagaPL(DescritorPilha);
+                            //DescritorPilha = createPlaylist(DescritorDB);//Arrumar
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    else{
+                        //DescritorPilha = createPlaylist(DescritorDB);//Arrumar
+                    }
+                    break;
+                default:
+                    break;
                 }
                 break;
             case 3:            
-                //printLista();
+                imprimir(DescritorDB);
                 break;
             case 4:
 
@@ -73,7 +105,7 @@ int main(){
                             switch (implst)
                                 {
                                 case 's':
-                                    importLista(descritorDB);
+                                    importLista(DescritorDB);
                                     opa = 0;
                                     break;
                                 
@@ -90,10 +122,12 @@ int main(){
                 };
                 break;
             case 0:
-                if (descritorDB != NULL)
-                    apagaDB(descritorDB);
-                if (descritorPL != NULL)
-                    apagaPL(descritorPL);
+                if (DescritorDB != NULL)
+                    apagaDB(DescritorDB);
+                if (DescritorPilha != NULL)
+                    //apagaPL(DescritorPilha);
+                if (DescritorFila != NULL)
+                    //apagaPL(DescritorFila);
                 printf("Encerrando o Programa!\n");
                 sleep(1.5);
                 system("clear");

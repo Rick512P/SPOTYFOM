@@ -1,12 +1,12 @@
 #include "../Files_H/libs.h"
-
+/*
 Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor){
     int tamanho, cont=0, aviso;
     char musica[256], musicaaux[256];
     Musicpl *MusicItem = (Musicpl*)malloc(sizeof(Musicpl));
     printf("Para encerrar a inserção de musicas digite 'parar'");
         do{
-            Node *auxiliar = descritor->first;
+            Nodo *auxiliar = descritor->first;
             cont++;
             aviso = 0;
             printf("Entre com o nome da %d° musica!\n", cont);
@@ -58,3 +58,4 @@ Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor){
         }while(aviso != 2);
     return descritorpl;
 }
+*/

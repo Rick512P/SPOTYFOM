@@ -1,5 +1,5 @@
 #include "../Files_H/libs.h"
-
+/*
 Descpl* createPlaylist(Desc *descritor){
     int op, verifica;
     Descpl *descpl = (Descpl*)malloc(sizeof(Descpl));
@@ -41,3 +41,4 @@ Descpl* createPlaylist(Desc *descritor){
 
     return descpl;
 }
+*/

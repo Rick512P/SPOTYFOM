@@ -15,14 +15,9 @@ Date: 07/05/2024
 
 //Declaração das structs DB
 
-typedef struct node Node;
+typedef struct Nodo Nodo;
 typedef struct music Music;
 typedef struct desc Desc;
-
-//Declaração das structs Playlist
-typedef struct nodepl Nodepl;
-typedef struct musicpl Musicpl;
-typedef struct descpl Descpl;
 
 //Criação das structs db
 
@@ -36,45 +31,19 @@ struct music
 };
 
 
-struct node
+struct Nodo
 {
     Music *info;
-    Node *next;
+    Nodo *next;
 };
 
 
 struct desc
 {
     int size;
-    Node *first;
+    Nodo *first;
 };
 
-//Criação das structs playlist
-
-struct musicpl
-{
-    char Titulo[256];
-    char Artista[256];
-    char Letra[256];
-    int Reproducoes;
-    int id;
-};
-
-
-struct nodepl
-{
-    Musicpl *info;
-    Nodepl *next;
-    Nodepl *previous;
-};
-
-
-struct descpl
-{
-    int size;
-    Nodepl *first;
-    Nodepl *last; 
-};
 
 //Declaração das Funções DB
 
@@ -84,15 +53,79 @@ Desc * PreencherDataBase(int op, Desc *descritor);//preenche a lista DB
 void printLista(); //exibe a lista completa de musicas
 void apagaDB(Desc *descritor); //liibera a memória alocada para a lista db
 Desc * insertListDB(Desc *descritor, Music *MusicItem);
-Node * criaNodo();
+Nodo * criaNodo();
+void imprimir(Desc *descritor);
 
-//Declaração das Funções PL
-Descpl * createPlaylist(Desc *descritor); //cria uma playlist
-Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor);
-Descpl * playlitaleatoria(Descpl *descritorpl, Desc *descritor);
-Descpl * insertListPL(Descpl *descritor, Musicpl *MusicItem);
-void apagaPL(Descpl *descritor); //liibera a memória alocada para a lista db
-Nodepl * criaNodoPL();
+//Declarações Fila
+
+typedef struct musicfila MusicaFIla;
+typedef struct nodofila NodoFila;
+typedef struct descfila DescFila;
+
+struct musicfila{
+    char titulo[256];
+    char artista[256];
+    char letra[256];
+    int codigo;
+    int execucoes;
+};
+
+struct nodofila{
+    NodoFila *prox;
+    MusicaFIla *info;
+    NodoFila *ante;
+};
+
+struct descfila{
+    NodoFila *head;
+    NodoFila *tail;
+    int tamanho;
+};
+
+
+DescFila * criaDescFila();
+NodoFila * criaNodoFila();
+MusicaFIla * preencheElementoFila();
+void ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla);
+NodoFila * DEQUEUE(DescFila *descritor);
+void ShowQueue(DescFila *descritor);
+void limpaQueue(DescFila *descritor);
+
+
+// Declarações Pilha
+
+typedef struct musicpIlha MusicaPIlha;
+typedef struct NodoPilha NodoPilha;
+typedef struct DescPilha DescPilha;
+
+struct musicpIlha{
+    char titulo[256];
+    char artista[256];
+    char letra[256];
+    int codigo;
+    int execucoes;
+};
+
+struct NodoPilha{
+    NodoPilha *prox;
+    MusicaPIlha *info;
+};
+
+struct DescPilha{
+    NodoPilha *pilha;
+    int tamanho;
+};
+
+
+DescPilha * criaDescPilha();
+NodoPilha * criaNodoPilha();
+MusicaPIlha * preencheElementoPilha();
+void inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica);
+NodoPilha * POP(DescPilha *descritor);
+void TOP(DescPilha *pilha);
+void ImprimirPIlha(DescPilha *descritor);
+void removeElemento(DescPilha *descritor);
+void limpaPilha(DescPilha *descritor);
 
 //ordenação
 int compare(const void* a, const void* b);

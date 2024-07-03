@@ -1,9 +1,10 @@
 #include "../Files_H/libs.h"
+/*
 
 Descpl * playlitaleatoria(Descpl *descritorpl, Desc *descritor){
     int tamanho, cont=0, *vetor, i;
     Musicpl *MusicItem = (Musicpl*)malloc(sizeof(Musicpl));
-    Node *auxiliar = descritor->first;
+    Nodo *auxiliar = descritor->first;
 
     printf("Entre com o número de musica a adicionar na playlist que faremos o resto!");
     scanf("!%d",&tamanho);
@@ -18,9 +19,9 @@ Descpl * playlitaleatoria(Descpl *descritorpl, Desc *descritor){
 
     for (i = 0; i<tamanho; i++)
     {
-        /*
-            Função para gerar valores aleatórios de 0 até descritor->size e salvar eles dentro do vetor
-        */
+        
+          //  Função para gerar valores aleatórios de 0 até descritor->size e salvar eles dentro do vetor
+        
        vetor[i] = rand() % (descritor->size + 1);
     }
 
@@ -51,3 +52,5 @@ Descpl * playlitaleatoria(Descpl *descritorpl, Desc *descritor){
 int compare(const void* a, const void* b) {
     return (*(int*)a - *(int*)b);
 }
+
+*/

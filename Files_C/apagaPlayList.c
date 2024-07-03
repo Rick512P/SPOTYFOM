@@ -1,8 +1,8 @@
 #include "../Files_H/libs.h"
-
+/*
 void apagaPL(Descpl *descritor){
-    Nodepl *auxiliar = descritor->first; //declara que auxiliar é igual ao primeiro elemento da lista
-    Nodepl *Del; //declara variavel que receberá os valores a serem liberados
+    Nodopl *auxiliar = descritor->first; //declara que auxiliar é igual ao primeiro elemento da lista
+    Nodopl *Del; //declara variavel que receberá os valores a serem liberados
     for (int i = 0; i < descritor->size; i++)//loop para remover todos os elementos 
     {
         Del = auxiliar;//variavel Del recebe o valor de auxiliar
@@ -15,3 +15,4 @@ void apagaPL(Descpl *descritor){
     descritor->first = NULL;
     descritor->size = 0;
 }
+*/

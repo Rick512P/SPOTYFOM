@@ -10,3 +10,10 @@ Desc * DataBase(){
 
     return desc;
 }
+
+Nodo * criaNodo(){
+    Nodo *nodo = (Nodo*)malloc(sizeof(Nodo));
+    nodo->info = NULL;
+    nodo->next = NULL;
+    return nodo;
+}
