@@ -127,5 +127,6 @@ void ImprimirPIlha(DescPilha *descritor);
 void removeElemento(DescPilha *descritor);
 void limpaPilha(DescPilha *descritor);
 
-//ordenação
+//funções complementares
 int compare(const void* a, const void* b);
+void searchMusic(Desc *descritor, char op);

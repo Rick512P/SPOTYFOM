@@ -19,9 +19,10 @@ int main(){
         printf("---------------------\n");
         printf("1- EXECUÇÃO\n");
         printf("2- PLAYLIST\n");
-        printf("3- IMPRESSÃO\n");
-        printf("4- RELATÓRIO\n");
-        printf("5- OPÇÕES AVANÇADAS\n");
+        printf("3- Busca\n");
+        printf("4- IMPRESSÃO\n");
+        printf("5- RELATÓRIO\n");
+        printf("6- OPÇÕES AVANÇADAS\n");
         printf("0- SAIR\n");
         printf("---------------------\n");
         scanf("%d", &opcode);
@@ -35,6 +36,8 @@ int main(){
             case 2:
                 char playlist;
                 puts("Deseja criar uma playlist Personalizada ou Aleatória? p/a");
+                scanf(" %c", &playlist);
+                playlist=tolower(playlist);
                 switch (playlist)
                 {
                 case 'p':
@@ -82,13 +85,19 @@ int main(){
                 }
                 break;
             case 3:            
-                imprimir(DescritorDB);
+                puts("Escolha a forma de busca");
+                puts("C - Código");
+                puts("T - Título");
+                puts("A - Artista");
+                scanf(" %c", &implst);
+                implst = tolower(implst);
+                searchMusic(DescritorDB, implst);
                 break;
             case 4:
-
+                imprimir(DescritorDB);
                 break;
 
-            case 5:
+            case 6:
                 printf("1- Importar nova lista de musicas\n");//opcoes avancadas
                 printf("0- Voltar\n");//opcoes avancadas
                 scanf("%d", &opa);
