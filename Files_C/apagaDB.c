@@ -1,6 +1,7 @@
 #include "../Files_H/libs.h"
 
-void apagaDB(Desc *descritor){
+void apagaDB(Desc *descritor) //Apaga o Banco de Músicas
+{
     Nodo *auxiliary = descritor->first;
     Nodo *previous;
     while (auxiliary->next != NULL){

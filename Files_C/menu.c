@@ -142,7 +142,7 @@ int main(){
             case 4:
                 puts("Deseja visualizar uma música em específico, ou todas? 1/n");
                 getchar();
-                scanf(" %d", &implst);
+                scanf(" %c", &implst);
                 switch (implst)
                 {
                 case '1':
@@ -160,9 +160,14 @@ int main(){
                     break;
                 }
                 break;
+            case 5: //Gera Relatório
+                RelatorioFila(DescritorFila);
+                RelatorioPilha(DescritorPilha);
+                RelatorioDB(DescritorDB);
+                break;
 
             case 6:
-                printf("1- Importar nova lista de musicas\n");//opcoes avancadas
+                printf("1- Importar lista Backup\n");//opcoes avancadas
                 printf("0- Voltar\n");//opcoes avancadas
                 scanf("%d", &opa);
                 while(opa != 0){
@@ -172,18 +177,25 @@ int main(){
                             puts("Debug");
                             break;
                         case 1: //encaminha para a função responsável por importar uma nova lista de musicas
-                            printf("Aviso! A lista padrão já está importada, deseja importar uma nova?\nIsto sobreescreverá toda a lista existente! s/n\n");
+                            printf("Aviso! A lista padrão já está importada, deseja importar uma nova?\nIsto sobreescreverá toda a lista existente! \nE caso haja playlists as mesmas serão deletadas! s/n\n");
                             scanf(" %c", &implst);
+                            puts(" ");
                             implst=tolower(implst);
                             switch (implst)
                                 {
                                 case 's':
+                                    if (DescritorPilha != NULL)
+                                        limpaPilha(DescritorPilha);
+                                    if (DescritorFila != NULL)
+                                        limpaQueue(DescritorFila);
                                     importLista(DescritorDB);
                                     opa = 0;
                                     break;
                                 
                                 default:
                                     printf("Importação cancelada!");
+                                    puts(" ");
+                                    opa = 0;
                                     break;
                                 }
                             break;
@@ -198,9 +210,9 @@ int main(){
                 if (DescritorDB != NULL)
                     apagaDB(DescritorDB);
                 if (DescritorPilha != NULL)
-                    //apagaPL(DescritorPilha);
+                    limpaPilha(DescritorPilha);
                 if (DescritorFila != NULL)
-                    //apagaPL(DescritorFila);
+                    limpaQueue(DescritorFila);
                 printf("Encerrando o Programa!\n");
                 sleep(1.5);
                 system("clear");

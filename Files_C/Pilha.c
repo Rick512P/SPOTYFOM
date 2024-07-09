@@ -14,6 +14,7 @@ NodoPilha * criaNodoPilha(){
 }
 
 DescPilha * inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica){
+    int verifica = 0;
     elemento->info = musica;
     if (descritor->tamanho == 0) // Verifica se a Pilha esta Vazia
     {   
@@ -25,10 +26,17 @@ DescPilha * inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *
         while (aux != NULL)
         {
             auxanterior = aux;
+            if (auxanterior->info->codigo == elemento->info->codigo)
+                verifica++;
             aux = aux->prox;
         }
-        auxanterior->prox = elemento;
-        descritor->tamanho++;
+        if (verifica == 0)
+        {        
+            auxanterior->prox = elemento;
+            descritor->tamanho++;
+        }
+        else
+            puts("Musica já inserida!");
     }
     return descritor;
 }
@@ -97,8 +105,9 @@ void ImprimirPIlha(DescPilha *descritor, Desc *desc){
             {
                 auxiliar = auxiliar->next;
             }
-            auxiliar->info->Reproducoes++;
-            
+            if (auxiliar != NULL)
+                auxiliar->info->Reproducoes++;
+                     
             printf("Artista/Banda: %s\n",aux->info->artista);
             printf("Título: %s\n",aux->info->titulo);
             printf("Letra: %s\n",aux->info->letra);

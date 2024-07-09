@@ -77,7 +77,8 @@ void ShowQueue(DescFila *descritor, Desc *desc){
             {
                 auxiliar = auxiliar->next;
             }
-            auxiliar->info->Reproducoes++;
+            if (auxiliar != NULL)
+                auxiliar->info->Reproducoes++;
             
             printf("Artista/Banda: %s\n",aux->info->artista);
             printf("Título: %s\n",aux->info->titulo);
@@ -101,6 +102,7 @@ void limpaQueue(DescFila *descritor){
             free(aux->ante);
         aux = aux->prox;
     }
+    descritor = NULL;
 }
 
 void DELETE(DescFila *desc)

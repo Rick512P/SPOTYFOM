@@ -50,11 +50,10 @@ struct desc
 void importLista(Desc *descritor); //Importa a lista contendo as musicas
 Desc * DataBase(); //cria a lista db
 Desc * PreencherDataBase(int op, Desc *descritor);//preenche a lista DB
-void printLista(); //exibe a lista completa de musicas
 void apagaDB(Desc *descritor); //liibera a memória alocada para a lista db
 Desc * insertListDB(Desc *descritor, Music *MusicItem);
-Nodo * criaNodo();
-void imprimir(Desc *descritor);
+Nodo * criaNodo(); //Função Responsável por Criar o nó
+void imprimir(Desc *descritor);//exibe a lista completa de musicas
 
 //Declarações Fila
 
@@ -130,6 +129,14 @@ void MakeNull(DescPilha *desc);
 int compare(const void* a, const void* b);
 int jaPresente(int *vetor, int tamanho, int valor);
 Music * searchMusic(Desc *descritor, char op);
+
+//Relatório
+    //Pilha
+    void RelatorioPilha(DescPilha *descritor); //Gera um arquivo .txt Com a PLaylist Pessoal do Usuário
+    //Fila
+    void RelatorioFila(DescFila *descritor); //Gera um arquivo .txt Com a PLaylist Pessoal do Usuário
+    //DB
+    void RelatorioDB(Desc *descritor); //Gera um arquivo .txt Com a PLaylist Pessoal do Usuário
 
 //Cria Playlist
     //Aleatória

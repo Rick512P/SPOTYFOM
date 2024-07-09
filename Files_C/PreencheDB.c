@@ -4,9 +4,10 @@ Desc * PreencherDataBase(int op, Desc *descritor){
     char *token, linha[256], endereco[256];
     int reproducoes, size;
     Music *MusicItem = (Music*)malloc(sizeof(Music));
+    
     FILE *arquivo;
 
-    switch (op)
+    switch (op)//Verifica Se é o caminho padrão ou um novo arquivo
     {
         case 1:
             while (getchar() != '\n');
@@ -39,10 +40,19 @@ Desc * PreencherDataBase(int op, Desc *descritor){
             token = strtok(NULL,";");
             strcpy(MusicItem->Letra,token);
             token = strtok(NULL,";");
+            switch (op)
+            {
+            case 0:
+                MusicItem->Reproducoes = 0;
+                break;
             
-            MusicItem->Reproducoes=0;
+            case 1:
+                MusicItem->Reproducoes = atoi(token);
+                break;
+            }
+            
 
-            insertListDB(descritor, MusicItem);
+            insertListDB(descritor, MusicItem);//Chama função para Adicionar Musica a Lista
         }
         else{
             size = atoi(linha);

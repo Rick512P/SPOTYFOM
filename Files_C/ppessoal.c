@@ -19,7 +19,7 @@ DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor)
     
         Musica = searchMusic(descritor, op);
 
-        if (Musica != NULL && Musica->id != -1){
+        if (Musica != NULL && Musica->id != -1 && Musica->id != -2){
             MusicaPIlha *MusicItem = (MusicaPIlha*)malloc(sizeof(MusicaPIlha));
             Nodo *auxiliar = descritor->first;
             NodoPilha *nodo = criaNodoPilha();
@@ -37,7 +37,7 @@ DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor)
             //puts(Pilha->pilha->info->artista);
         }
         
-    }while(Musica->id != -1);
+    }while(Musica->id != -1 || Pilha->tamanho >= descritor->size);
     if (Pilha->tamanho == 0)
         Pilha = NULL;    
     else

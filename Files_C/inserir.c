@@ -1,8 +1,9 @@
 #include "../Files_H/libs.h"
 
-Desc * insertListDB(Desc *descritor, Music *MusicItem){
+Desc * insertListDB(Desc *descritor, Music *MusicItem) //Função Responsável por Adicionar MusicItem na lista
+{
     Nodo *auxiliary = descritor->first, *novoElemento;
-    novoElemento = criaNodo();
+    novoElemento = criaNodo(); //Cria Nó para receber MusicItem e adicionar na lista
     novoElemento->info = MusicItem;
     if (descritor->first == NULL)
     {
@@ -17,27 +18,3 @@ Desc * insertListDB(Desc *descritor, Music *MusicItem){
         descritor->size++;
     }
 }
-
-/*
-Descpl * insertListPL(Descpl *descritor, Musicpl *MusicItem){
-    Nodopl *auxiliary = descritor->first, *novoElemento;
-    novoElemento = criaNodoPL();
-    novoElemento->info = MusicItem;
-//Corrigir pois esta como se fosse uma pilha, mas pode ser uma fila também
-    if (descritor->size == 0)
-    {
-        descritor->first = novoElemento;
-        descritor->last = novoElemento;
-        descritor->size++;
-    }
-    else{
-        while(auxiliary->next != NULL){
-            auxiliary=auxiliary->next;
-        }
-        auxiliary->next = novoElemento;
-        descritor->size++;
-    }
-
-    return descritor;
-}
-*/
