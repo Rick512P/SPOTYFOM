@@ -1,78 +1,46 @@
 #include "../Files_H/libs.h"
-/*
+
 DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor)
 {
     int tamanho, cont=0, aviso;
-    char musica[256], musicaaux[256];
+    char musica, op;
     NodoPilha *nodo = NULL;
+    Music * Musica = NULL;
 
-    printf("Para encerrar a inserção de musicas digite 'parar'");
-        do{
+    puts("Escolha a forma de busca");
+    puts("C - Código");
+    puts("T - Título");
+    puts("A - Artista");
+    getchar();
+    scanf(" %c", &op);
+    op=tolower(op);
+    puts("Para Parar Digite um Valor Negativo (Para Busca Via Código), ou Escreva 'parar' (Para Demais Buscas)");
+    do{
+    
+        Musica = searchMusic(descritor, op);
+
+        if (Musica != NULL && Musica->id != -1){
             MusicaPIlha *MusicItem = (MusicaPIlha*)malloc(sizeof(MusicaPIlha));
             Nodo *auxiliar = descritor->first;
+            NodoPilha *nodo = criaNodoPilha();
             cont++;
             aviso = 0;
 
-            puts("Escolha a forma de busca");
-            puts("C - Código");
-            puts("T - Título");
-            puts("A - Artista");
-            scanf(" %c", &musica);
+            strcpy(MusicItem->artista,Musica->Artista);
+            strcpy(MusicItem->titulo,Musica->Titulo);
+            strcpy(MusicItem->letra,Musica->Letra);
+            MusicItem->codigo = Musica->id;
+            MusicItem->execucoes = Musica->Reproducoes;
 
-            for(int i; i<tamanho;i++)//converte o titulo dado para minusculo
-            {
-                musica[i]=tolower(musica[i]);
-            }
-
-            printf("Entre com o nome da %d° musica!\n", cont);
-            tamanho = strlen(musica);
-            scanf(" %[^\n]", musica);
-
-            for(int i; i<tamanho;i++)//converte o titulo dado para minusculo
-            {
-                musica[i]=tolower(musica[i]);
-            }
-
-
-
-            //verificação de parada
-            if (tamanho==strlen("parar"))//confere se o valor de entrada possui o mesmo tamanho da condição de parada
-            {
-                if (strcmp(musica,"parar")==0)//compara se o valor de entrada é 'parar', se for, encerra o preenchimento da playlist
-                {
-                    printf("Playlist preenchida!\n");
-                    aviso = 2;
-                }                
-            }
-
-            //inserção
-            while (aviso==0 || auxiliar->next != NULL){
-                if (strlen(auxiliar->info->Titulo)==strlen(musica))
-                {
-                    for(int i; i<tamanho;i++)//converte o titulo dado para minusculo
-                    {
-                        musicaaux[i]=tolower(auxiliar->info->Titulo[i]);
-                    }
-                    if (strcmp(musica,musicaaux))
-                    {
-                        strcpy(MusicItem->artista,auxiliar->info->Artista);
-                        strcpy(MusicItem->letra,auxiliar->info->Letra);
-                        strcpy(MusicItem->titulo,auxiliar->info->Titulo);
-                        MusicItem->codigo=auxiliar->info->id;
-                        MusicItem->execucoes = auxiliar->info->Reproducoes;
-                        aviso++;
-                    }
-                }
-                auxiliar = auxiliar->next;
-            }*//*
-            if (aviso==0)
-            {
-                printf("Música não encontrada!");
-            }
-            else if (aviso=1) // insere na lista caso a musica tenha sido encontrada
-                desc = insertListPL(descritorpl, MusicItem);*//*
-            
-        }while(aviso != 2);
+            //puts(MusicItem->artista);
+            Pilha = inserePilha(Pilha, nodo, MusicItem);
+            //puts(Pilha->pilha->info->artista);
+        }
+        
+    }while(Musica->id != -1);
+    if (Pilha->tamanho == 0)
+        Pilha = NULL;    
+    else
+        puts("Playlist Criada com Sucesso!");
     return Pilha;
 }
-*/

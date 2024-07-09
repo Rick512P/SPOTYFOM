@@ -21,24 +21,6 @@ NodoFila * criaNodoFila(){
     return elemento;
 }
 
-MusicaFIla * preencheElementoFila(){
-    MusicaFIla *elemento = (MusicaFIla *)malloc(sizeof(MusicaFIla));
-    char auxiliar[256];
-    puts("Entre com o nome do artista/banda: ");
-    scanf(" %255[^\n]", auxiliar);
-    strcpy(elemento->artista, auxiliar);
-    puts("Entre com o Título da Música: ");
-    scanf(" %255[^\n]", auxiliar);
-    strcpy(elemento->titulo, auxiliar);
-    puts("Entre com a Letra da Música: ");
-    scanf(" %255[^\n]", auxiliar);
-    strcpy(elemento->letra, auxiliar);
-    puts("Entre com o código Único da Música: ");
-    scanf("%d", &elemento->codigo);
-    elemento->execucoes = 0;
-    return elemento;
-}
-
 DescFila * ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla)
 {
     elemento->info = MusicaFIla;
@@ -79,22 +61,30 @@ NodoFila * DEQUEUE(DescFila *descritor)//remove o primeiro elemento da Fila
 
 }
 
-void ShowQueue(DescFila *descritor){
+void ShowQueue(DescFila *descritor, Desc *desc){
     if (descritor->tamanho == 0)
     {
         puts("Queue vazia!");
     }
     else{
         NodoFila *aux = descritor->head;
+        Nodo *auxiliar = desc->first;
         while (aux != NULL)
         {
+            auxiliar = desc->first;
+            aux->info->execucoes++;
+            while (auxiliar->info->id != aux->info->codigo)
+            {
+                auxiliar = auxiliar->next;
+            }
+            auxiliar->info->Reproducoes++;
+            
             printf("Artista/Banda: %s\n",aux->info->artista);
             printf("Título: %s\n",aux->info->titulo);
             printf("Letra: %s\n",aux->info->letra);
             printf("Execuções: %d\n",aux->info->execucoes);
             printf("ID: %d\n",aux->info->codigo);
             puts("");
-            aux->info->execucoes++;
             aux = aux->prox;
         }
     }
@@ -111,4 +101,11 @@ void limpaQueue(DescFila *descritor){
             free(aux->ante);
         aux = aux->prox;
     }
+}
+
+void DELETE(DescFila *desc)
+{
+    desc->tail = NULL;
+    desc->head = desc->tail;
+    desc->tamanho = 0;    
 }

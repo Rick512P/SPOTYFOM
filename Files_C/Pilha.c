@@ -13,25 +13,7 @@ NodoPilha * criaNodoPilha(){
     return elemento;
 }
 
-MusicaPIlha * preencheElementoPilha(){
-    MusicaPIlha *elemento = (MusicaPIlha *)malloc(sizeof(MusicaPIlha));
-    char auxiliar[256];
-    puts("Entre com o nome do artista/banda: ");
-    scanf(" %255[^\n]", auxiliar);
-    strcpy(elemento->artista, auxiliar);
-    puts("Entre com o Título da Música: ");
-    scanf(" %255[^\n]", auxiliar);
-    strcpy(elemento->titulo, auxiliar);
-    puts("Entre com a Letra da Música: ");
-    scanf(" %255[^\n]", auxiliar);
-    strcpy(elemento->letra, auxiliar);
-    puts("Entre com o código Único da Música: ");
-    scanf("%d", &elemento->codigo);
-    elemento->execucoes = 0;
-    return elemento;
-}
-
-void inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica){
+DescPilha * inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica){
     elemento->info = musica;
     if (descritor->tamanho == 0) // Verifica se a Pilha esta Vazia
     {   
@@ -48,6 +30,7 @@ void inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica)
         auxanterior->prox = elemento;
         descritor->tamanho++;
     }
+    return descritor;
 }
 
 NodoPilha * POP(DescPilha *descritor)//remove elemento do topo da lista
@@ -98,22 +81,30 @@ void TOP(DescPilha *pilha){
     }
 }
 
-void ImprimirPIlha(DescPilha *descritor){
+void ImprimirPIlha(DescPilha *descritor, Desc *desc){
     if (descritor->tamanho == 0)
     {
         puts("Pilha vazia!");
     }
     else{
         NodoPilha *aux = descritor->pilha;
+        Nodo *auxiliar = desc->first;
         while (aux != NULL)
         {
+            aux->info->execucoes++;
+            auxiliar = desc->first;
+            while (auxiliar->info->id != aux->info->codigo)
+            {
+                auxiliar = auxiliar->next;
+            }
+            auxiliar->info->Reproducoes++;
+            
             printf("Artista/Banda: %s\n",aux->info->artista);
             printf("Título: %s\n",aux->info->titulo);
             printf("Letra: %s\n",aux->info->letra);
             printf("Execuções: %d\n",aux->info->execucoes);
             printf("ID: %d\n",aux->info->codigo);
             puts("");
-            aux->info->execucoes++;
             aux = aux->prox;
         }
     }
@@ -133,4 +124,9 @@ void limpaPilha(DescPilha *descritor){
     }
     descritor->tamanho = 0;
     descritor->pilha = NULL;
+}
+
+void MakeNull(DescPilha *desc){
+    desc->pilha = NULL;
+    desc->tamanho = 0;
 }

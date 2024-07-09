@@ -26,11 +26,49 @@ int main(){
         printf("0- SAIR\n");
         printf("---------------------\n");
         scanf("%d", &opcode);
+        puts(" ");
 
         switch (opcode)
         {
             case 1:
                 //Execução
+                if(DescritorDB == NULL)
+                    puts("Banco de Dados Vazio!");
+                else if (DescritorFila != NULL && DescritorPilha != NULL)
+                {
+                    puts("Deseja executar sua Playlista Pessoal ou Aleatória? p/a");
+                    getchar();
+                    scanf(" %c", &implst);
+                    implst = tolower(implst);
+                    switch (implst)
+                    {
+                    case 'p':
+                        ImprimirPIlha(DescritorPilha, DescritorDB);
+                        MakeNull(DescritorPilha);
+                        DescritorPilha = NULL;
+                        break;
+                    case 'a':
+                        ShowQueue(DescritorFila, DescritorDB);
+                        DELETE(DescritorFila);
+                        DescritorFila = NULL;
+                    default:
+                        break;
+                    }
+                }
+                else if(DescritorFila != NULL){
+                    ShowQueue(DescritorFila, DescritorDB);
+                    DELETE(DescritorFila);
+                    DescritorFila = NULL;
+                }
+                else if(DescritorPilha != NULL){
+                    ImprimirPIlha(DescritorPilha, DescritorDB);
+                    MakeNull(DescritorPilha);
+                    DescritorPilha = NULL;
+                }
+                else
+                    puts("Playlists Não Criadas!");
+                
+                puts(" ");
                 break;
 
             case 2:
@@ -43,35 +81,40 @@ int main(){
                 case 'p':
                     if(DescritorPilha != NULL){
                         printf("Aviso, a playlist anterior será deletada!\n");
-                        printf("Deseja continuar? s/n");
+                        printf("Deseja continuar? s/n\n");
                         scanf(" %c", &implst);
                         implst=tolower(implst);
                         switch (implst)
                         {
                         case 's':
-                            //DescritorPilha = createPlaylist(DescritorDB);//Arrumar
+                            MakeNull(DescritorPilha);
+                            DescritorPilha = criaDescPilha();
+                            DescritorPilha = playlistpessoal(DescritorPilha, DescritorDB);
+                            //ImprimirPIlha(DescritorPilha, DescritorDB);
                             break;
                         default:
                             break;
                         }
                     }
                     else{
-                        //DescritorPilha = createPlaylist(DescritorDB);//Arrumar
+                        DescritorPilha = criaDescPilha();
+                        DescritorPilha = playlistpessoal(DescritorPilha, DescritorDB);
+                        //ImprimirPIlha(DescritorPilha, DescritorDB);
                     }                    
                     break;
                 case 'a':
                     if(DescritorFila != NULL){
                         printf("Aviso, a playlist anterior será deletada!\n");
-                        printf("Deseja continuar? s/n");
+                        printf("Deseja continuar? s/n\n");
                         scanf(" %c", &implst);
                         implst=tolower(implst);
                         switch (implst)
                         {
                         case 's':
-                            limpaQueue(DescritorFila);
+                            DELETE(DescritorFila);
                             DescritorFila = criaDescFila();
                             DescritorFila = playlitaleatoria(DescritorDB, DescritorFila);
-                            //ShowQueue(DescritorFila);
+                            //ShowQueue(DescritorFila, DescritorDB);
                             break;
                         default:
                             break;
@@ -80,7 +123,7 @@ int main(){
                     else{
                         DescritorFila = criaDescFila();
                         DescritorFila = playlitaleatoria(DescritorDB, DescritorFila);
-                        //ShowQueue(DescritorFila);
+                        //ShowQueue(DescritorFila, DescritorDB);
                     }
                     break;
                 default:
@@ -97,7 +140,25 @@ int main(){
                 searchMusic(DescritorDB, implst);
                 break;
             case 4:
-                imprimir(DescritorDB);
+                puts("Deseja visualizar uma música em específico, ou todas? 1/n");
+                getchar();
+                scanf(" %d", &implst);
+                switch (implst)
+                {
+                case '1':
+                    puts("Escolha a forma de busca");
+                    puts("C - Código");
+                    puts("T - Título");
+                    puts("A - Artista");
+                    scanf(" %c", &implst);
+                    implst = tolower(implst);
+                    searchMusic(DescritorDB, implst);
+                    break;
+                case 'n':
+                case 'N':
+                    imprimir(DescritorDB);
+                    break;
+                }
                 break;
 
             case 6:

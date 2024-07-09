@@ -11,6 +11,7 @@ DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila)
     printf("Entre com o número de musica a adicionar na playlist que faremos o resto!\n");
     getchar();
     scanf("%d", &tamanho);
+    puts(" ");
 
     srand(time(NULL));
 
@@ -32,11 +33,6 @@ DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila)
 
     qsort(vetor, tamanho, sizeof(int), compare); //Ordena os valores
 
-    // Imprimir o vetor
-    for (int i = 0; i < tamanho; i++) {
-        printf("Vetor ordenado %d, %d\n", i, vetor[i]);
-    }
-
     //inserção
     while (auxiliar->next != NULL){
         for (i = 0; i<tamanho; i++){ 
@@ -57,6 +53,7 @@ DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila)
     }
 
     free(vetor);
+    puts("Playlist Criada com Sucesso!");
     return Fila;
 }
 

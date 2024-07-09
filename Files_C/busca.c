@@ -1,9 +1,11 @@
 #include "../Files_H/libs.h"
 
-void searchMusic(Desc *descritor, char op){
+Music * searchMusic(Desc *descritor, char op)
+{
     int code, code2, iaux = 0, verifica = 0;
     char titulo[256], tituloAux[256], artista[256], artistaAux[256];
     Nodo *auxiliar = descritor->first;
+    Music *MUSICAAUX = (Music*)malloc(sizeof(Music));
     switch (op)
     {
     case 'c'://Busca via Código
@@ -11,7 +13,12 @@ void searchMusic(Desc *descritor, char op){
         scanf("%d",&code);
         while (auxiliar != NULL)
         {
-            if (code == auxiliar->info->id){
+            if (code<0){
+                MUSICAAUX = (Music*)malloc(sizeof(Music));
+                MUSICAAUX->id = -1;
+            }
+
+            else if (code == auxiliar->info->id){
                 verifica++;
                 printf("Artista: %s\n", auxiliar->info->Artista);
                 printf("Título: %s\n",auxiliar->info->Titulo);
@@ -19,12 +26,16 @@ void searchMusic(Desc *descritor, char op){
                 printf("Código: %d\n", auxiliar->info->id);
                 printf("Execuções: %d\n", auxiliar->info->Reproducoes);
                 puts(" ");
+                MUSICAAUX = auxiliar->info;
             }
             auxiliar = auxiliar->next;
         }
         
-        if (verifica == 0)  
+         if (verifica == 0 && MUSICAAUX->id != -1){
+            MUSICAAUX = (Music*)malloc(sizeof(Music));
+            MUSICAAUX->id = -2;
             puts("Nenhuma Música encontrada com este código!");
+         }
 
         break;
     
@@ -57,51 +68,61 @@ void searchMusic(Desc *descritor, char op){
             iaux++;
         }
         titulo[iaux]='\0';
-        puts(titulo);
-        code = strlen(titulo);
-        while (auxiliar != NULL){
-            code2 = strlen(auxiliar->info->Titulo);
-            iaux = 0;
-            strcpy(tituloAux,auxiliar->info->Titulo);
-            for (int i = 0; i<code2; i++){
-                if(tituloAux[i] == ' ' || tituloAux[i] == '-' || tituloAux[i] == '_' || tituloAux[i] == '(' || tituloAux[i] == ')' ){
-                    if (iaux > 0)
-                       iaux--;
-                    else
-                        iaux = -1;
-                }/* Normatização de acentos
-                else if(tituloAux[i] == L'í' || tituloAux[i] == L'Í' || tituloAux[i] == L'Ì' || tituloAux[i] == L'ì' || tituloAux[i] == L'î' || tituloAux[i] == L'Î' || tituloAux[i] == L'ĩ' || tituloAux[i] == L'Ĩ')
-                    tituloAux[iaux] = 'i';
-                else if(tituloAux[i] == L'á' || tituloAux[i] == L'Á' || tituloAux[i] == L'À' || tituloAux[i] == L'à' || tituloAux[i] == L'â' || tituloAux[i] == L'Â' || tituloAux[i] == L'ã' || tituloAux[i] == L'Ã')
-                    tituloAux[iaux] = 'a';
-                else if(tituloAux[i] == L'é' || tituloAux[i] == L'É' || tituloAux[i] == L'È' || tituloAux[i] == L'è' || tituloAux[i] == L'ê' || tituloAux[i] == L'Ê' || tituloAux[i] == L'ẽ' || tituloAux[i] == L'Ẽ')
-                    tituloAux[iaux] = 'e';
-                else if(tituloAux[i] == L'ó' || tituloAux[i] == L'Ó' || tituloAux[i] == L'Ò' || tituloAux[i] == L'ò' || tituloAux[i] == L'ô' || tituloAux[i] == L'Ô' || tituloAux[i] == L'õ' || tituloAux[i] == L'Õ')
-                    tituloAux[iaux] = 'o';
-                else if(tituloAux[i] == L'ú' || tituloAux[i] == L'Ú' || tituloAux[i] == L'Ù' || tituloAux[i] == L'ù' || tituloAux[i] == L'û' || tituloAux[i] == L'Û' || tituloAux[i] == L'ũ' || tituloAux[i] == L'Ũ')
-                    tituloAux[iaux] = 'u';
-                else if(tituloAux[i] == L'ç' || tituloAux[i] == L'Ç')
-                    tituloAux[iaux] = 'c';*/
-                else
-                    tituloAux[iaux]=tolower(tituloAux[i]);
-                iaux++;
-            }
-            tituloAux[iaux]='\0';
-            if (strcmp(titulo, tituloAux) == 0) //Verifica se é o mesmo titulo
-            {
-                verifica++;
-                printf("Artista: %s\n", auxiliar->info->Artista);
-                printf("Título: %s\n",auxiliar->info->Titulo);
-                printf("Letra: %s\n", auxiliar->info->Letra);
-                printf("Código: %d\n", auxiliar->info->id);
-                printf("Execuções: %d\n", auxiliar->info->Reproducoes);
-                puts(" ");
-            }
-                
-            auxiliar = auxiliar->next;
+        //puts(titulo);
+        if(strcmp(titulo, "parar") == 0){
+            MUSICAAUX = (Music*)malloc(sizeof(Music));
+            MUSICAAUX->id = -1;
         }
-        if (verifica == 0)  
-            puts("Titulo Não Encontrado!");
+        else{
+            code = strlen(titulo);
+            while (auxiliar != NULL){
+                code2 = strlen(auxiliar->info->Titulo);
+                iaux = 0;
+                strcpy(tituloAux,auxiliar->info->Titulo);
+                for (int i = 0; i<code2; i++){
+                    if(tituloAux[i] == ' ' || tituloAux[i] == '-' || tituloAux[i] == '_' || tituloAux[i] == '(' || tituloAux[i] == ')' ){
+                        if (iaux > 0)
+                        iaux--;
+                        else
+                            iaux = -1;
+                    }/* Normatização de acentos
+                    else if(tituloAux[i] == L'í' || tituloAux[i] == L'Í' || tituloAux[i] == L'Ì' || tituloAux[i] == L'ì' || tituloAux[i] == L'î' || tituloAux[i] == L'Î' || tituloAux[i] == L'ĩ' || tituloAux[i] == L'Ĩ')
+                        tituloAux[iaux] = 'i';
+                    else if(tituloAux[i] == L'á' || tituloAux[i] == L'Á' || tituloAux[i] == L'À' || tituloAux[i] == L'à' || tituloAux[i] == L'â' || tituloAux[i] == L'Â' || tituloAux[i] == L'ã' || tituloAux[i] == L'Ã')
+                        tituloAux[iaux] = 'a';
+                    else if(tituloAux[i] == L'é' || tituloAux[i] == L'É' || tituloAux[i] == L'È' || tituloAux[i] == L'è' || tituloAux[i] == L'ê' || tituloAux[i] == L'Ê' || tituloAux[i] == L'ẽ' || tituloAux[i] == L'Ẽ')
+                        tituloAux[iaux] = 'e';
+                    else if(tituloAux[i] == L'ó' || tituloAux[i] == L'Ó' || tituloAux[i] == L'Ò' || tituloAux[i] == L'ò' || tituloAux[i] == L'ô' || tituloAux[i] == L'Ô' || tituloAux[i] == L'õ' || tituloAux[i] == L'Õ')
+                        tituloAux[iaux] = 'o';
+                    else if(tituloAux[i] == L'ú' || tituloAux[i] == L'Ú' || tituloAux[i] == L'Ù' || tituloAux[i] == L'ù' || tituloAux[i] == L'û' || tituloAux[i] == L'Û' || tituloAux[i] == L'ũ' || tituloAux[i] == L'Ũ')
+                        tituloAux[iaux] = 'u';
+                    else if(tituloAux[i] == L'ç' || tituloAux[i] == L'Ç')
+                        tituloAux[iaux] = 'c';*/
+                    else
+                        tituloAux[iaux]=tolower(tituloAux[i]);
+                    iaux++;
+                }
+                tituloAux[iaux]='\0';
+                if (strcmp(titulo, tituloAux) == 0) //Verifica se é o mesmo titulo
+                {
+                    verifica++;
+                    printf("Artista: %s\n", auxiliar->info->Artista);
+                    printf("Título: %s\n",auxiliar->info->Titulo);
+                    printf("Letra: %s\n", auxiliar->info->Letra);
+                    printf("Código: %d\n", auxiliar->info->id);
+                    printf("Execuções: %d\n", auxiliar->info->Reproducoes);
+                    puts(" ");
+                    MUSICAAUX = auxiliar->info;
+                }
+                    
+                auxiliar = auxiliar->next;
+            }
+             if (verifica == 0 && MUSICAAUX->id != -1){
+                MUSICAAUX = (Music*)malloc(sizeof(Music));
+                MUSICAAUX->id = -2;
+                puts("Titulo Não Encontrado!");
+             }
+        }
         break;
     
     case 'a'://Busca via Artista
@@ -134,53 +155,67 @@ void searchMusic(Desc *descritor, char op){
             iaux++;
         }
         artista[iaux]='\0';
-        code = strlen(artista);
-        while (auxiliar != NULL){
-            code2 = strlen(auxiliar->info->Artista);
-            iaux = 0;
-            strcpy(artistaAux,auxiliar->info->Artista);
-            for (int i = 0; i<code2; i++){
-                if(artistaAux[i] == ' ' || artistaAux[i] == '-' || artistaAux[i] == '_' || artistaAux[i] == '(' || artistaAux[i] == ')' ){
-                    if (iaux > 0)
-                       iaux--;
-                    else
-                        iaux = -1;
-                }/* Normatização de acentos
-                else if(artistaAux[i] == L'í' || artistaAux[i] == L'Í' || artistaAux[i] == L'Ì' || artistaAux[i] == L'ì' || artistaAux[i] == L'î' || artistaAux[i] == L'Î' || artistaAux[i] == L'ĩ' || artistaAux[i] == L'Ĩ')
-                    artistaAux[iaux] = 'i';
-                else if(artistaAux[i] == L'á' || artistaAux[i] == L'Á' || artistaAux[i] == L'À' || artistaAux[i] == L'à' || artistaAux[i] == L'â' || artistaAux[i] == L'Â' || artistaAux[i] == L'ã' || artistaAux[i] == L'Ã')
-                    artistaAux[iaux] = 'a';
-                else if(artistaAux[i] == L'é' || artistaAux[i] == L'É' || artistaAux[i] == L'È' || artistaAux[i] == L'è' || artistaAux[i] == L'ê' || artistaAux[i] == L'Ê' || artistaAux[i] == L'ẽ' || artistaAux[i] == L'Ẽ')
-                    artistaAux[iaux] = 'e';
-                else if(artistaAux[i] == L'ó' || artistaAux[i] == L'Ó' || artistaAux[i] == L'Ò' || artistaAux[i] == L'ò' || artistaAux[i] == L'ô' || artistaAux[i] == L'Ô' || artistaAux[i] == L'õ' || artistaAux[i] == L'Õ')
-                    artistaAux[iaux] = 'o';
-                else if(artistaAux[i] == L'ú' || artistaAux[i] == L'Ú' || artistaAux[i] == L'Ù' || artistaAux[i] == L'ù' || artistaAux[i] == L'û' || artistaAux[i] == L'Û' || artistaAux[i] == L'ũ' || artistaAux[i] == L'Ũ')
-                    artistaAux[iaux] = 'u';
-                else if(artistaAux[i] == L'ç' || artistaAux[i] == L'Ç')
-                    artistaAux[iaux] = 'c';*/
-                else
-                    artistaAux[iaux]=tolower(artistaAux[i]);
-                iaux++;
-            }
-            artistaAux[iaux]='\0';
-            if (strcmp(artista, artistaAux) == 0) //Verifica se é o mesmo artista
-            {
-                verifica++;
-                printf("Artista: %s\n", auxiliar->info->Artista);
-                printf("Título: %s\n",auxiliar->info->Titulo);
-                printf("Letra: %s\n", auxiliar->info->Letra);
-                printf("Código: %d\n", auxiliar->info->id);
-                printf("Execuções: %d\n", auxiliar->info->Reproducoes);
-                puts(" ");
-            }
-                
-            auxiliar = auxiliar->next;
+        if(strcmp(artista, "parar") == 0){
+            MUSICAAUX = (Music*)malloc(sizeof(Music));
+            MUSICAAUX->id = -1;
         }
-        if (verifica == 0)  
-            puts("Artista Não Encontrado!");
+        else{
+            code = strlen(artista);
+            while (auxiliar != NULL){
+                code2 = strlen(auxiliar->info->Artista);
+                iaux = 0;
+                strcpy(artistaAux,auxiliar->info->Artista);
+                for (int i = 0; i<code2; i++){
+                    if(artistaAux[i] == ' ' || artistaAux[i] == '-' || artistaAux[i] == '_' || artistaAux[i] == '(' || artistaAux[i] == ')' ){
+                        if (iaux > 0)
+                        iaux--;
+                        else
+                            iaux = -1;
+                    }/* Normatização de acentos
+                    else if(artistaAux[i] == L'í' || artistaAux[i] == L'Í' || artistaAux[i] == L'Ì' || artistaAux[i] == L'ì' || artistaAux[i] == L'î' || artistaAux[i] == L'Î' || artistaAux[i] == L'ĩ' || artistaAux[i] == L'Ĩ')
+                        artistaAux[iaux] = 'i';
+                    else if(artistaAux[i] == L'á' || artistaAux[i] == L'Á' || artistaAux[i] == L'À' || artistaAux[i] == L'à' || artistaAux[i] == L'â' || artistaAux[i] == L'Â' || artistaAux[i] == L'ã' || artistaAux[i] == L'Ã')
+                        artistaAux[iaux] = 'a';
+                    else if(artistaAux[i] == L'é' || artistaAux[i] == L'É' || artistaAux[i] == L'È' || artistaAux[i] == L'è' || artistaAux[i] == L'ê' || artistaAux[i] == L'Ê' || artistaAux[i] == L'ẽ' || artistaAux[i] == L'Ẽ')
+                        artistaAux[iaux] = 'e';
+                    else if(artistaAux[i] == L'ó' || artistaAux[i] == L'Ó' || artistaAux[i] == L'Ò' || artistaAux[i] == L'ò' || artistaAux[i] == L'ô' || artistaAux[i] == L'Ô' || artistaAux[i] == L'õ' || artistaAux[i] == L'Õ')
+                        artistaAux[iaux] = 'o';
+                    else if(artistaAux[i] == L'ú' || artistaAux[i] == L'Ú' || artistaAux[i] == L'Ù' || artistaAux[i] == L'ù' || artistaAux[i] == L'û' || artistaAux[i] == L'Û' || artistaAux[i] == L'ũ' || artistaAux[i] == L'Ũ')
+                        artistaAux[iaux] = 'u';
+                    else if(artistaAux[i] == L'ç' || artistaAux[i] == L'Ç')
+                        artistaAux[iaux] = 'c';*/
+                    else
+                        artistaAux[iaux]=tolower(artistaAux[i]);
+                    iaux++;
+                }
+                artistaAux[iaux]='\0';
+                if (strcmp(artista, artistaAux) == 0) //Verifica se é o mesmo artista
+                {
+                    verifica++;
+                    printf("Artista: %s\n", auxiliar->info->Artista);
+                    printf("Título: %s\n",auxiliar->info->Titulo);
+                    printf("Letra: %s\n", auxiliar->info->Letra);
+                    printf("Código: %d\n", auxiliar->info->id);
+                    printf("Execuções: %d\n", auxiliar->info->Reproducoes);
+                    puts(" ");
+                    MUSICAAUX = auxiliar->info;
+                }
+                    
+                auxiliar = auxiliar->next;
+            }
+            if (verifica == 0 && MUSICAAUX->id != -1){
+                MUSICAAUX = (Music*)malloc(sizeof(Music));
+                MUSICAAUX->id = -2;
+                puts("Artista Não Encontrado!");
+            }
+        }
         break;
 
     default:
         break;
     }
+    if (MUSICAAUX == NULL)
+        return NULL;
+    else
+        return MUSICAAUX;
 }

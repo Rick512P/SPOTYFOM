@@ -85,12 +85,11 @@ struct descfila{
 
 DescFila * criaDescFila();
 NodoFila * criaNodoFila();
-MusicaFIla * preencheElementoFila();
 DescFila * ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla);
 NodoFila * DEQUEUE(DescFila *descritor);
-void ShowQueue(DescFila *descritor);
+void ShowQueue(DescFila *descritor, Desc *desc);
 void limpaQueue(DescFila *descritor);
-
+void DELETE(DescFila *desc);
 
 // Declarações Pilha
 
@@ -119,21 +118,22 @@ struct DescPilha{
 
 DescPilha * criaDescPilha();
 NodoPilha * criaNodoPilha();
-MusicaPIlha * preencheElementoPilha();
-void inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica);
+DescPilha * inserePilha(DescPilha *descritor, NodoPilha *elemento, MusicaPIlha *musica);
 NodoPilha * POP(DescPilha *descritor);
 void TOP(DescPilha *pilha);
-void ImprimirPIlha(DescPilha *descritor);
+void ImprimirPIlha(DescPilha *descritor, Desc *desc);
 void removeElemento(DescPilha *descritor);
 void limpaPilha(DescPilha *descritor);
+void MakeNull(DescPilha *desc);
 
 //funções complementares
 int compare(const void* a, const void* b);
 int jaPresente(int *vetor, int tamanho, int valor);
-void searchMusic(Desc *descritor, char op);
+Music * searchMusic(Desc *descritor, char op);
 
 //Cria Playlist
     //Aleatória
         DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila);
 
     //Pessoal
+        DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor);
