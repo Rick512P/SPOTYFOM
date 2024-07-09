@@ -86,7 +86,7 @@ struct descfila{
 DescFila * criaDescFila();
 NodoFila * criaNodoFila();
 MusicaFIla * preencheElementoFila();
-void ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla);
+DescFila * ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla);
 NodoFila * DEQUEUE(DescFila *descritor);
 void ShowQueue(DescFila *descritor);
 void limpaQueue(DescFila *descritor);
@@ -129,4 +129,11 @@ void limpaPilha(DescPilha *descritor);
 
 //funções complementares
 int compare(const void* a, const void* b);
+int jaPresente(int *vetor, int tamanho, int valor);
 void searchMusic(Desc *descritor, char op);
+
+//Cria Playlist
+    //Aleatória
+        DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila);
+
+    //Pessoal

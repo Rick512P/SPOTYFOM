@@ -41,7 +41,7 @@ int main(){
                 switch (playlist)
                 {
                 case 'p':
-                    if(DescritorFila->head != NULL){
+                    if(DescritorPilha != NULL){
                         printf("Aviso, a playlist anterior será deletada!\n");
                         printf("Deseja continuar? s/n");
                         scanf(" %c", &implst);
@@ -49,27 +49,6 @@ int main(){
                         switch (implst)
                         {
                         case 's':
-                            //apagaPL(DescritorFila);
-                            //DescritorFila = createPlaylist(DescritorDB);
-                            break;
-                        default:
-                            break;
-                        }
-                    }
-                    else{
-                        //DescritorFila = createPlaylist(DescritorDB);
-                    }
-                    break;
-                case 'a':
-                    if(DescritorPilha->pilha != NULL){
-                        printf("Aviso, a playlist anterior será deletada!\n");
-                        printf("Deseja continuar? s/n");
-                        scanf(" %c", &implst);
-                        implst=tolower(implst);
-                        switch (implst)
-                        {
-                        case 's':
-                            //apagaPL(DescritorPilha);
                             //DescritorPilha = createPlaylist(DescritorDB);//Arrumar
                             break;
                         default:
@@ -78,6 +57,30 @@ int main(){
                     }
                     else{
                         //DescritorPilha = createPlaylist(DescritorDB);//Arrumar
+                    }                    
+                    break;
+                case 'a':
+                    if(DescritorFila != NULL){
+                        printf("Aviso, a playlist anterior será deletada!\n");
+                        printf("Deseja continuar? s/n");
+                        scanf(" %c", &implst);
+                        implst=tolower(implst);
+                        switch (implst)
+                        {
+                        case 's':
+                            limpaQueue(DescritorFila);
+                            DescritorFila = criaDescFila();
+                            DescritorFila = playlitaleatoria(DescritorDB, DescritorFila);
+                            //ShowQueue(DescritorFila);
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    else{
+                        DescritorFila = criaDescFila();
+                        DescritorFila = playlitaleatoria(DescritorDB, DescritorFila);
+                        //ShowQueue(DescritorFila);
                     }
                     break;
                 default:

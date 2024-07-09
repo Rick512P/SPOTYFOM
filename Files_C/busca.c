@@ -39,7 +39,7 @@ void searchMusic(Desc *descritor, char op){
                     iaux--;
                 else
                     iaux = -1;
-            }
+            }/* Normatização de acentos
             else if(titulo[i] == L'í' || titulo[i] == L'Í' || titulo[i] == L'Ì' || titulo[i] == L'ì' || titulo[i] == L'î' || titulo[i] == L'Î' || titulo[i] == L'ĩ' || titulo[i] == L'Ĩ')
                 titulo[iaux] = 'i';
             else if(titulo[i] == L'á' || titulo[i] == L'Á' || titulo[i] == L'À' || titulo[i] == L'à' || titulo[i] == L'â' || titulo[i] == L'Â' || titulo[i] == L'ã' || titulo[i] == L'Ã')
@@ -51,7 +51,7 @@ void searchMusic(Desc *descritor, char op){
             else if(titulo[i] == L'ú' || titulo[i] == L'Ú' || titulo[i] == L'Ù' || titulo[i] == L'ù' || titulo[i] == L'û' || titulo[i] == L'Û' || titulo[i] == L'ũ' || titulo[i] == L'Ũ')
                 titulo[iaux] = 'u';
             else if(titulo[i] == L'ç' || titulo[i] == L'Ç')
-                titulo[iaux] = 'c';
+                titulo[iaux] = 'c';*/
             else
                 titulo[iaux]=tolower(titulo[i]);
             iaux++;
@@ -69,7 +69,7 @@ void searchMusic(Desc *descritor, char op){
                        iaux--;
                     else
                         iaux = -1;
-                }
+                }/* Normatização de acentos
                 else if(tituloAux[i] == L'í' || tituloAux[i] == L'Í' || tituloAux[i] == L'Ì' || tituloAux[i] == L'ì' || tituloAux[i] == L'î' || tituloAux[i] == L'Î' || tituloAux[i] == L'ĩ' || tituloAux[i] == L'Ĩ')
                     tituloAux[iaux] = 'i';
                 else if(tituloAux[i] == L'á' || tituloAux[i] == L'Á' || tituloAux[i] == L'À' || tituloAux[i] == L'à' || tituloAux[i] == L'â' || tituloAux[i] == L'Â' || tituloAux[i] == L'ã' || tituloAux[i] == L'Ã')
@@ -81,7 +81,7 @@ void searchMusic(Desc *descritor, char op){
                 else if(tituloAux[i] == L'ú' || tituloAux[i] == L'Ú' || tituloAux[i] == L'Ù' || tituloAux[i] == L'ù' || tituloAux[i] == L'û' || tituloAux[i] == L'Û' || tituloAux[i] == L'ũ' || tituloAux[i] == L'Ũ')
                     tituloAux[iaux] = 'u';
                 else if(tituloAux[i] == L'ç' || tituloAux[i] == L'Ç')
-                    tituloAux[iaux] = 'c';
+                    tituloAux[iaux] = 'c';*/
                 else
                     tituloAux[iaux]=tolower(tituloAux[i]);
                 iaux++;
@@ -116,7 +116,7 @@ void searchMusic(Desc *descritor, char op){
                     iaux--;
                 else
                     iaux = -1;
-            }
+            }/* Normatização de acentos
             else if(artista[i] == L'í' || artista[i] == L'Í' || artista[i] == L'Ì' || artista[i] == L'ì' || artista[i] == L'î' || artista[i] == L'Î' || artista[i] == L'ĩ' || artista[i] == L'Ĩ')
                 artista[iaux] = 'i';
             else if(artista[i] == L'á' || artista[i] == L'Á' || artista[i] == L'À' || artista[i] == L'à' || artista[i] == L'â' || artista[i] == L'Â' || artista[i] == L'ã' || artista[i] == L'Ã')
@@ -128,7 +128,7 @@ void searchMusic(Desc *descritor, char op){
             else if(artista[i] == L'ú' || artista[i] == L'Ú' || artista[i] == L'Ù' || artista[i] == L'ù' || artista[i] == L'û' || artista[i] == L'Û' || artista[i] == L'ũ' || artista[i] == L'Ũ')
                 artista[iaux] = 'u';
             else if(artista[i] == L'ç' || artista[i] == L'Ç')
-                artista[iaux] = 'c';
+                artista[iaux] = 'c';*/
             else
                 artista[iaux]=tolower(artista[i]);
             iaux++;
@@ -145,7 +145,7 @@ void searchMusic(Desc *descritor, char op){
                        iaux--;
                     else
                         iaux = -1;
-                }
+                }/* Normatização de acentos
                 else if(artistaAux[i] == L'í' || artistaAux[i] == L'Í' || artistaAux[i] == L'Ì' || artistaAux[i] == L'ì' || artistaAux[i] == L'î' || artistaAux[i] == L'Î' || artistaAux[i] == L'ĩ' || artistaAux[i] == L'Ĩ')
                     artistaAux[iaux] = 'i';
                 else if(artistaAux[i] == L'á' || artistaAux[i] == L'Á' || artistaAux[i] == L'À' || artistaAux[i] == L'à' || artistaAux[i] == L'â' || artistaAux[i] == L'Â' || artistaAux[i] == L'ã' || artistaAux[i] == L'Ã')
@@ -157,7 +157,7 @@ void searchMusic(Desc *descritor, char op){
                 else if(artistaAux[i] == L'ú' || artistaAux[i] == L'Ú' || artistaAux[i] == L'Ù' || artistaAux[i] == L'ù' || artistaAux[i] == L'û' || artistaAux[i] == L'Û' || artistaAux[i] == L'ũ' || artistaAux[i] == L'Ũ')
                     artistaAux[iaux] = 'u';
                 else if(artistaAux[i] == L'ç' || artistaAux[i] == L'Ç')
-                    artistaAux[iaux] = 'c';
+                    artistaAux[iaux] = 'c';*/
                 else
                     artistaAux[iaux]=tolower(artistaAux[i]);
                 iaux++;

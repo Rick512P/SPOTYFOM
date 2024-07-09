@@ -39,7 +39,8 @@ MusicaFIla * preencheElementoFila(){
     return elemento;
 }
 
-void ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla){
+DescFila * ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla)
+{
     elemento->info = MusicaFIla;
     if (descritor->tamanho == 0) // Verifica se a Fila esta Vazia
     {   
@@ -54,6 +55,7 @@ void ENQUEUE(DescFila *descritor, NodoFila *elemento, MusicaFIla *MusicaFIla){
         descritor->tail = elemento;
         descritor->tamanho++;
     }
+    return descritor;
 }
 
 NodoFila * DEQUEUE(DescFila *descritor)//remove o primeiro elemento da Fila

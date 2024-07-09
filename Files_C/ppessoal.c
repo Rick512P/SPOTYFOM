@@ -1,14 +1,29 @@
 #include "../Files_H/libs.h"
 /*
-Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor){
+DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor)
+{
     int tamanho, cont=0, aviso;
     char musica[256], musicaaux[256];
-    Musicpl *MusicItem = (Musicpl*)malloc(sizeof(Musicpl));
+    NodoPilha *nodo = NULL;
+
     printf("Para encerrar a inserção de musicas digite 'parar'");
         do{
+            MusicaPIlha *MusicItem = (MusicaPIlha*)malloc(sizeof(MusicaPIlha));
             Nodo *auxiliar = descritor->first;
             cont++;
             aviso = 0;
+
+            puts("Escolha a forma de busca");
+            puts("C - Código");
+            puts("T - Título");
+            puts("A - Artista");
+            scanf(" %c", &musica);
+
+            for(int i; i<tamanho;i++)//converte o titulo dado para minusculo
+            {
+                musica[i]=tolower(musica[i]);
+            }
+
             printf("Entre com o nome da %d° musica!\n", cont);
             tamanho = strlen(musica);
             scanf(" %[^\n]", musica);
@@ -17,6 +32,8 @@ Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor){
             {
                 musica[i]=tolower(musica[i]);
             }
+
+
 
             //verificação de parada
             if (tamanho==strlen("parar"))//confere se o valor de entrada possui o mesmo tamanho da condição de parada
@@ -38,24 +55,24 @@ Descpl * playlistpessoal(Descpl *descritorpl, Desc *descritor){
                     }
                     if (strcmp(musica,musicaaux))
                     {
-                        strcpy(MusicItem->Artista,auxiliar->info->Artista);
-                        strcpy(MusicItem->Letra,auxiliar->info->Letra);
-                        strcpy(MusicItem->Titulo,auxiliar->info->Titulo);
-                        MusicItem->id=auxiliar->info->id;
-                        MusicItem->Reproducoes = auxiliar->info->Reproducoes;
+                        strcpy(MusicItem->artista,auxiliar->info->Artista);
+                        strcpy(MusicItem->letra,auxiliar->info->Letra);
+                        strcpy(MusicItem->titulo,auxiliar->info->Titulo);
+                        MusicItem->codigo=auxiliar->info->id;
+                        MusicItem->execucoes = auxiliar->info->Reproducoes;
                         aviso++;
                     }
                 }
                 auxiliar = auxiliar->next;
-            }
+            }*//*
             if (aviso==0)
             {
                 printf("Música não encontrada!");
             }
             else if (aviso=1) // insere na lista caso a musica tenha sido encontrada
-                descritorpl = insertListPL(descritorpl, MusicItem);
+                desc = insertListPL(descritorpl, MusicItem);*//*
             
         }while(aviso != 2);
-    return descritorpl;
+    return Pilha;
 }
 */
