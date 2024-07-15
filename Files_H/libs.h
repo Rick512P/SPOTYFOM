@@ -138,9 +138,11 @@ Music * searchMusic(Desc *descritor, char op);
     //DB
     void RelatorioDB(Desc *descritor); //Gera um arquivo .txt Com a PLaylist Pessoal do Usuário
 
-//Cria Playlist
+//Playlist
     //Aleatória
-        DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila);
+        DescFila * playlitaleatoria(Desc *descritor, DescFila *Fila); //Cria a Playlist
+        void ExibirFila(DescFila *descritor); //Função Responsável por exibir todas as músicas da playlist
 
     //Pessoal
-        DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor);
+        DescPilha * playlistpessoal(DescPilha *Pilha, Desc *descritor); //Cria a Playlist
+        void ExibirPilha(DescPilha *descritor); //Função Responsável por exibir todas as músicas da playlist

@@ -1,13 +1,13 @@
 #include "../Files_H/libs.h"
 
 int main(){
-    int opcode = 0, opa = 0;
+    int opcode = 0, opa;
     char implst;
     Nodo *MusicaDB = NULL;
     Desc *DescritorDB = NULL;
-    NodoFila *MusicaFila = NULL;
+    NodoFila *MusicaFila = NULL, *filaaux = NULL;
     DescFila *DescritorFila = NULL;
-    NodoPilha *MusicaPilha = NULL;
+    NodoPilha *MusicaPilha = NULL, *pilhaaux = NULL;
     DescPilha *DescritorPilha = NULL;
 
 
@@ -16,6 +16,7 @@ int main(){
     printf("Seja Bem vindo ao seu Gerenciador Pessoal de Músicas!\n");
     do
     {
+        opa = -1;
         printf("---------------------\n");
         printf("1- EXECUÇÃO\n");
         printf("2- PLAYLIST\n");
@@ -44,11 +45,38 @@ int main(){
                     {
                     case 'p':
                         ImprimirPIlha(DescritorPilha, DescritorDB);
+                        filaaux = DescritorFila->head;
+                        while (filaaux != NULL)
+                        {
+                            pilhaaux = DescritorPilha->pilha;
+                            while (pilhaaux != NULL)
+                            {
+                                if (filaaux->info->codigo == pilhaaux->info->codigo)
+                                    filaaux->info->execucoes++;
+                                pilhaaux = pilhaaux->prox;
+                            }
+                            filaaux = filaaux->prox;
+                        }
+                        
                         MakeNull(DescritorPilha);
                         DescritorPilha = NULL;
                         break;
                     case 'a':
                         ShowQueue(DescritorFila, DescritorDB);
+
+                        filaaux = DescritorFila->head;
+                        while (filaaux != NULL)
+                        {
+                            pilhaaux = DescritorPilha->pilha;
+                            while (pilhaaux != NULL)
+                            {
+                                if (filaaux->info->codigo == pilhaaux->info->codigo)
+                                    pilhaaux->info->execucoes++;
+                                pilhaaux = pilhaaux->prox;
+                            }
+                            filaaux = filaaux->prox;
+                        }
+
                         DELETE(DescritorFila);
                         DescritorFila = NULL;
                     default:
@@ -167,14 +195,17 @@ int main(){
                 break;
 
             case 6:
-                printf("1- Importar lista Backup\n");//opcoes avancadas
-                printf("0- Voltar\n");//opcoes avancadas
-                scanf("%d", &opa);
                 while(opa != 0){
+
+                    printf("1- Importar lista Backup\n");//opcoes avancadas
+                    puts("2- Mostrar Playlist Aleatória");
+                    puts("3- Mostrar Playlist Pessoal");
+                    printf("0- Voltar\n");//opcoes avancadas
+                    scanf("%d", &opa);
+
                     switch (opa)
-                        {
+                    {
                         case 0:
-                            puts("Debug");
                             break;
                         case 1: //encaminha para a função responsável por importar uma nova lista de musicas
                             printf("Aviso! A lista padrão já está importada, deseja importar uma nova?\nIsto sobreescreverá toda a lista existente! \nE caso haja playlists as mesmas serão deletadas! s/n\n");
@@ -189,16 +220,28 @@ int main(){
                                     if (DescritorFila != NULL)
                                         limpaQueue(DescritorFila);
                                     importLista(DescritorDB);
-                                    opa = 0;
                                     break;
                                 
                                 default:
                                     printf("Importação cancelada!");
                                     puts(" ");
-                                    opa = 0;
                                     break;
                                 }
                             break;
+                        case 2:
+                            if (DescritorFila != NULL)
+                                ExibirFila(DescritorFila);
+                            else
+                                puts("Playlist Aleatória Vazia!");
+                            break;
+
+                        case 3:
+                            if (DescritorPilha != NULL)
+                                ExibirPilha(DescritorPilha);
+                            else
+                                puts("Playlist Pessoal Vazia!");
+                            break;
+
                         default:
                             printf("Opção inválida");
                             break;
